@@ -1,0 +1,20 @@
+{
+	"ImportPath": "github.com/ray5hen/gymtool",
+	"GoVersion": "go1.8",
+	"GodepVersion": "v79",
+	"Deps": [
+		{
+			"ImportPath": "github.com/line/line-bot-sdk-go/linebot",
+			"Comment": "1.0.0-58-gb25432f",
+			"Rev": "b25432f2bcee69c27e303c1e18857316911c8c6c"
+		},
+		{
+			"ImportPath": "golang.org/x/net/context",
+			"Rev": "f5079bd7f6f74e23c4d65efa0f4ce14cbd6a3c0f"
+		},
+		{
+			"ImportPath": "golang.org/x/net/context/ctxhttp",
+			"Rev": "f5079bd7f6f74e23c4d65efa0f4ce14cbd6a3c0f"
+		}
+	]
+}

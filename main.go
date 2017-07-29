@@ -41,8 +41,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
    				   //if err != nil {
       				// handle error
    				   //}
-				var a = gymtool.Gt("p111")
-				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+a)).Do(); err != nil {
+				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(gymtool.Gt(message.Text))).Do(); err != nil {
 					log.Print(err)
 				}
 			case *linebot.StickerMessage:

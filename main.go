@@ -7,7 +7,7 @@ import (
 	"os"
 	"github.com/line/line-bot-sdk-go/linebot"
 	//"line/line-bot-sdk-go/linebot"
-	//"github.com/ray5hen/linebottemplate/lib/gymtool"
+	gymtool "github.com/ray5hen/gymtool/tools"
 )
 var bot *linebot.Client
 func main() {
@@ -41,7 +41,8 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
    				   //if err != nil {
       				// handle error
    				   //}
-				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text)).Do(); err != nil {
+				var a = gymtool.Gt("p111")
+				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(message.Text+a)).Do(); err != nil {
 					log.Print(err)
 				}
 			case *linebot.StickerMessage:

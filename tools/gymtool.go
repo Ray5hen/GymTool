@@ -50,6 +50,10 @@ func weight(code string, msg string) string{
 }
 
 func food(msg string) string{
+    //response :="No this food." 
+    var response string
+    other:=""
+
     foods := map[string]string{
     "雞蛋":"碳水化合物(g): 0 ,蛋白質(g): 6",
     "鮭魚":"碳水化合物(g): 0 ,蛋白質(g): 20",
@@ -66,9 +70,19 @@ func food(msg string) string{
     }
     var input = msg[1:len(msg)]
     if f, ok := foods[input]; ok {
-    return "每100克"+input+"含"+f
+    response= "每100克"+input+"含"+f
+    }else{
+    response="找不到:"+input
     }
-    return "No this food."
+
+    for k := range foods {
+        if strings.ContainsAny(k,input){
+        other+=other+k+","
+        }
+
+    }
+
+    return response+",您可搜尋類似食物:"
 }
 
 func rm(msg string) string{

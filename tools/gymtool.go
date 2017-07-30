@@ -8,7 +8,7 @@ import (
 
 func Gt(message string) string{
     toolCode := strings.ToLower(string(message[0]))
-    response :="輸入錯誤,請輸入h查看功能列表"
+    response :="看不懂你輸入的東西QQ,輸入h有好康的"
 
     switch toolCode {
     case string('k'),string('p'),string('m'),string('i') :
@@ -18,7 +18,7 @@ func Gt(message string) string{
     case string('r') :
     response=rm(message)
     case string('h') :
-    response="重量轉換:p數字(轉公斤),k數字(轉公磅) / 長度轉換:m數字(轉吋與英尺),i數字(轉公尺) / 食物成份:f食物名稱 / 1rm計算: r重量-組數(r100-8)"
+    response="重量轉換:p數字(轉公斤),k數字(轉公磅)\n長度轉換:m數字(轉吋與英尺),i數字(轉公尺)\n食物成份:f食物名稱\n1rm計算: r重量-最多可做組數(r100-8)"
     }
 	return response
 
@@ -42,7 +42,7 @@ func weight(code string, msg string) string{
         return strconv.FormatFloat(amount * 0.0254, 'f', 2, 64) + "m"
         }
     }
-    return "invalid input"
+    return "Oops, 你輸入的格式可能有誤,請參考h內的說明"
 }
 
 func food(msg string) string{
@@ -66,9 +66,9 @@ func food(msg string) string{
     }
     var input = msg[1:len(msg)]
     if f, ok := foods[input]; ok {
-    response= "每100克"+input+"含"+f
+    response= "每100克 "+input+" 含: "+f
     }else{
-    response="找不到:"+input
+    response="找不到: "+input
     }
 
     for k := range foods {
@@ -78,12 +78,12 @@ func food(msg string) string{
 
     }
 
-    return response+",您可搜尋類似食物:"+other
+    return response+"\n您可搜尋類似食物:"+other
 }
 
 func rm(msg string) string{
     //var weight, reps
-    var response string
+    response:="Oops, 你輸入的格式可能有誤,請參考h內的說明"
     if strings.ContainsAny(msg,"-"){
         data:=strings.Split(msg[1:len(msg)],"-")
 
@@ -95,6 +95,28 @@ func rm(msg string) string{
     }
     return response
 }
+
+// func bodyinfo(msg string) string{
+//     var response string
+//     if strings.ContainsAny(msg,"-"){
+//         data:=strings.Split(msg[1:len(msg)],"-")
+
+//         if height, err:=strconv.ParseFloat(data[0], 64);err==nil{
+//            if weight, err:=strconv.ParseFloat(data[1], 64);err==nil{
+//               if age, err:=strconv.Atoi(data[2]);err==nil{
+//                  if sex, err:=strconv.Atoi(data[3]);err==nil{
+//                     if sex==1{
+//                          response = strconv.FormatFloat( 10*weight+6.25*height-5*age+5 , 'f', 2, 64)
+//                     }else{
+//                          response = strconv.FormatFloat( 10*weight+6.25*height-5*age-161 , 'f', 2, 64)
+//                     }
+//                  }
+//                }
+//             }
+//         } 
+//     }
+    
+// }
 // func schdule(msg string) {
 //     traningCode := msg(1:3)
 //     switch traningCode {

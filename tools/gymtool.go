@@ -82,7 +82,7 @@ func food(msg string) string{
 
     }
 
-    return response+",您可搜尋類似食物:"
+    return response+",您可搜尋類似食物:"+other
 }
 
 func rm(msg string) string{

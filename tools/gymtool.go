@@ -11,12 +11,14 @@ func Gt(message string) string{
     response :="輸入錯誤,請輸入h查看功能列表"
 
     switch toolCode {
-    case string('k'),string('p') :
+    case string('k'),string('p'),string('m'),string('i') :
     response=weight(toolCode, message)
-    case string('m'),string('i') :
+    case string('f') :
     response=food(message)
     case string('r') :
     response=rm(message)
+    case string('h') :
+    response="重量轉換:p數字(轉公斤),k數字(轉公磅) / 長度轉換:m數字(轉吋與英尺),i數字(轉公尺) / 食物成份:f食物名稱 / 1rm計算: r重量-組數(r100-8)"
 
     }
 
@@ -77,7 +79,7 @@ func rm(msg string) string{
 
         if weight, err:=strconv.ParseFloat(data[0], 64);err==nil{
            if reps, err:=strconv.ParseFloat(data[1], 64);err==nil{
-             response = strconv.FormatFloat(100 * weight / 52.2 + 41.9 * math.Exp(-0.055 * reps), 'f', 2, 64)
+             response = strconv.FormatFloat( (100 * weight) / 48.8 + (53.8 * math.Exp(-0.075 * reps)) ), 'f', 2, 64)
            }
         } 
     }

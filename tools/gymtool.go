@@ -79,7 +79,7 @@ func rm(msg string) string{
 
         if weight, err:=strconv.ParseFloat(data[0], 64);err==nil{
            if reps, err:=strconv.ParseFloat(data[1], 64);err==nil{
-             response = strconv.FormatFloat( (100 * weight) / 48.8 + (53.8 * math.Exp(-0.075 * reps)) , 'f', 2, 64)
+             response = strconv.FormatFloat( (100 * weight) / (42.2 + (41.9 * math.Exp(-0.075 * reps))) , 'f', 2, 64)
            }
         } 
     }

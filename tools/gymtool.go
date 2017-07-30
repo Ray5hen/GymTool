@@ -19,11 +19,7 @@ func Gt(message string) string{
     response=rm(message)
     case string('h') :
     response="重量轉換:p數字(轉公斤),k數字(轉公磅) / 長度轉換:m數字(轉吋與英尺),i數字(轉公尺) / 食物成份:f食物名稱 / 1rm計算: r重量-組數(r100-8)"
-
     }
-
-
-
 	return response
 
 }
@@ -41,7 +37,7 @@ func weight(code string, msg string) string{
         }else if code=="p"{
         return strconv.FormatFloat(amount * 2.2, 'f', 2, 64) + "Lbs"
         }else if code=="m"{
-        return strconv.FormatFloat(amount * 39.37, 'f', 2, 64) + "inches" + "or " + strconv.FormatFloat(amount * 3.28, 'f', 2, 64) +"feet"
+        return strconv.FormatFloat(amount * 39.37, 'f', 2, 64) + "inches " + "or " + strconv.FormatFloat(amount * 3.28, 'f', 2, 64) +"feet"
         }else if code=="i"{
         return strconv.FormatFloat(amount * 0.0254, 'f', 2, 64) + "m"
         }
@@ -77,7 +73,7 @@ func food(msg string) string{
 
     for k := range foods {
         if strings.ContainsAny(k,input){
-        other+=other+k+","
+        other=other+k+","
         }
 
     }

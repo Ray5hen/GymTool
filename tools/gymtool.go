@@ -17,8 +17,10 @@ func Gt(message string) string{
     response=food(message)
     case string('r') :
     response=rm(message)
+    case string('b') :
+    response=bodyinfo(message)
     case string('h') :
-    response="重量轉換:p數字(轉公斤),k數字(轉公磅)\n長度轉換:m數字(轉吋與英尺),i數字(轉公尺)\n食物成份:f食物名稱\n1rm計算: r重量-最多可做組數(r100-8)"
+    response="重量轉換:p數字(轉公斤),k數字(轉磅)\n長度轉換:m數字(轉吋與英尺),i數字(轉公尺)\n食物成份:f食物名稱\n1rm計算: r重量-最多可做組數(r100-8)"
     }
 	return response
 
@@ -96,32 +98,34 @@ func rm(msg string) string{
     return response
 }
 
-// func bodyinfo(msg string) string{
-//     var response string
-//     if strings.ContainsAny(msg,"-"){
-//         data:=strings.Split(msg[1:len(msg)],"-")
 
-//         if height, err:=strconv.ParseFloat(data[0], 64);err==nil{
-//            if weight, err:=strconv.ParseFloat(data[1], 64);err==nil{
-//               if age, err:=strconv.Atoi(data[2]);err==nil{
-//                  if sex, err:=strconv.Atoi(data[3]);err==nil{
-//                     if sex==1{
-//                          response = strconv.FormatFloat( 10*weight+6.25*height-5*age+5 , 'f', 2, 64)
-//                     }else{
-//                          response = strconv.FormatFloat( 10*weight+6.25*height-5*age-161 , 'f', 2, 64)
-//                     }
-//                  }
-//                }
-//             }
-//         } 
-//     }
-    
-// }
-// func schdule(msg string) {
-//     traningCode := msg(1:3)
-//     switch traningCode {
-//     case "531" :
+func bodyinfo(msg string) string{
+    response:="輸入資料有誤,格式為: b-身高(公分)-體重(公斤)-年齡(整數)-性別(1男0女),ex: b180-70-25-1"
+    if strings.ContainsAny(msg,"-"){
+        data:=strings.Split(msg[1:len(msg)],"-")
 
-//     }
-// }
+        if len(data)==4{
+                    if sex, err:=strconv.ParseFloat(data[3],64);err==nil{
+            response=strconv.FormatFloat(sex, 'f', 2, 64)
+        }else{
+            response="error"
+        }
+        if height, err:=strconv.ParseFloat(data[0], 64);err==nil{
+           if weight, err:=strconv.ParseFloat(data[1], 64);err==nil{
+              if age, err:=strconv.ParseFloat(data[2],64);err==nil{
+                 if sex, err:=strconv.ParseFloat(data[3],64);err==nil{
+                    if sex==1{
+                         response = "您的基礎代謝率(BMR): "+strconv.FormatFloat( 13.7*weight+5*height-6.8*age+66 , 'f', 2, 64)+" 大卡(Kcal)"
+                    }else if sex==0{
+                         response = "您的基礎代謝量(BMR): "+strconv.FormatFloat( 9.6*weight+1.8*height-4.7*age+655 , 'f', 2, 64)+" 大卡(Kcal)"
+                    }
+                 }
+               }
+            }
+        } 
+        }
+
+    }
+    return response
+}
 

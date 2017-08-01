@@ -106,9 +106,9 @@ func food(msg string) string{
         }
         for i := 0; i < len(record); i++ {
             if strings.ContainsAny(record[0],input){
-                search=search+record[0][0:strings.Index(record[0], ",")]+","
+                //search=search+record[0][0:strings.Index(record[0], ",")]+","
             }
-            
+            search=search+record
         }
         lineCount += 1
     }

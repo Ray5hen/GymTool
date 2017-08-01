@@ -5,7 +5,6 @@ import (
     "strings"
     "math"
     "encoding/csv"
-    "unicode/utf8"
     "fmt"
     "io"
     "os"
@@ -56,7 +55,7 @@ func food(msg string) string{
     ///response :="No this food." 
      //var response string
     // other:=""
-     response:="test"
+     response:="找不到您輸入的食物,"
     // foods := map[string]string{
     // "雞蛋":"碳水化合物(g): 0 ,蛋白質(g): 6",
     // "鮭魚":"碳水化合物(g): 0 ,蛋白質(g): 20",
@@ -106,19 +105,11 @@ func food(msg string) string{
             //return
         }
         for i := 0; i < len(record); i++ {
-            if strings.ContainsAny(record[0],input){
-                //search=search+record[0][0:strings.Index(record[0], ",")]+","
+            if strings.Contains(record[0],input){
+                response=input
             }
-            //r := '世'
-            //var buf [utf8.UTFMax]byte
-            //search=search+utf8.EncodeRune(buf, record[0])
-            
-            var buf [utf8.UTFMax]byte
-            for i, r := range record[0] {
-            rl := utf8.RuneLen(r)
-            si := i + rl
-            copy(buf[:], record[0][i:si])
-            search=search+fmt.Sprintln("%2d: %q; codepoint: %#6x; encoded bytes: %#v\n", i, r, r, buf[:rl])
+            if strings.ContainsAny(record[0],input){
+                search=search+record[0][0:strings.Index(record[0], ",")]+","
             }
         }
         lineCount += 1

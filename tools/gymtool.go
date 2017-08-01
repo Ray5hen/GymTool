@@ -5,6 +5,7 @@ import (
     "strings"
     "math"
     "encoding/csv"
+    "unicode/utf8"
     "fmt"
     "io"
     "os"
@@ -108,7 +109,17 @@ func food(msg string) string{
             if strings.ContainsAny(record[0],input){
                 //search=search+record[0][0:strings.Index(record[0], ",")]+","
             }
-            search=search+record[0]
+            //r := '世'
+            //var buf [utf8.UTFMax]byte
+            //search=search+utf8.EncodeRune(buf, record[0])
+            
+            var buf [utf8.UTFMax]byte
+            for i, r := range record[0] {
+            rl := utf8.RuneLen(r)
+            si := i + rl
+            copy(buf[:], record[0][i:si])
+            search=search+fmt.Sprintln("%2d: %q; codepoint: %#6x; encoded bytes: %#v\n", i, r, r, buf[:rl])
+            }
         }
         lineCount += 1
     }

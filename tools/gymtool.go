@@ -23,8 +23,10 @@ func Gt(message string) string{
     response=rm(message)
     case string('b') :
     response=bodyinfo(message)
+    case string('s') :
+    response=schedule(message)
     case string('h') :
-    response="重量轉換: p數字(轉公斤),k數字(轉磅)\n長度轉換: m數字(轉吋與英尺),i數字(轉公尺)\n食物成份: f食物名稱\n1rm計算: r重量-最多可做組數(r100-8)\n基礎代謝率(BMR): b身高(公分)-體重(公斤)-年齡(整數)-性別(1男0女)"
+    response="重量轉換: p數字(轉公斤),k數字(轉磅)\n長度轉換: m數字(轉吋與英尺),i數字(轉公尺)\n食物成份: f食物名稱\n1rm計算: r重量-最多可做組數(r100-8)\n基礎代謝率(BMR): b身高(公分)-體重(公斤)-年齡(整數)-性別(1男0女)\n訓練課表: 請按s-h查詢"
     }
 	return response
 
@@ -164,3 +166,66 @@ func bodyinfo(msg string) string{
     return response
 }
 
+func schedule(msg string) string{
+
+response:="目前提供下列運動課表\n1. 5-3-1 訓練: s-fto-部位(s,b,d)-第幾週(1,2,3,4)-1rm重量, Ex: s-fto-s-1-120"
+    ftoMap:=map[int]map[int]float64{
+        1: map[int]float64{
+            1:0.75,
+            2:0.8,
+            3:0.85,
+            4:1.05,
+            5:1.1,
+            6:1.15,
+        },
+        2: map[int]float64{
+            1:0.8,
+            2:0.85,
+            3:0.9,
+            4:1.05,
+            5:1.1,
+            6:1.15,
+        },
+        3: map[int]float64{
+            1:0.75,
+            2:0.85,
+            3:0.95,
+            4:1.05,
+            5:1.1,
+            6:1.15,
+        },
+        4: map[int]float64{
+            1:0.6,
+            2:0.65,
+            3:0.7,
+        },
+    }
+    workoutMap:=map[string]string{
+        "s":"Squat",
+        "b":"Bench Press",
+        "d":"Deadlift",
+    }
+
+data:=strings.Split(msg[1:len(msg)],"-")
+
+if data[1]=="fto"{
+    day ,err:=strconv.Atoi(data[3])
+    weight ,err:=strconv.ParseFloat(data[4],64)
+    if err==nil && day <5{
+    switch day {
+    case 1:
+        response=fmt.Sprintf("%s-第%s週(每組5Reps)\n第一組%.2f\n第二組%.2f\n第三組%.2f\n第J+1組%.2f\n第J+2組%.2f\n第J+3組%.2f\n",workoutMap[data[2]],data[3],ftoMap[1][1]*weight,ftoMap[1][2]*weight,ftoMap[1][3]*weight,ftoMap[1][4]*weight*ftoMap[1][3],ftoMap[1][5]*weight*ftoMap[1][3],ftoMap[1][6]*weight*ftoMap[1][3])   
+    case 2:
+        response=fmt.Sprintf("%s-第%s週(每組3Reps)\n第一組%.2f\n第二組%.2f\n第三組%.2f\n第J+1組%.2f\n第J+2組%.2f\n第J+3組%.2f\n",workoutMap[data[2]],data[3],ftoMap[2][1]*weight,ftoMap[2][2]*weight,ftoMap[2][3]*weight,ftoMap[2][4]*weight*ftoMap[2][3],ftoMap[2][5]*weight*ftoMap[2][3],ftoMap[2][6]*weight*ftoMap[2][3])   
+    case 3:
+        response=fmt.Sprintf("%s-第%s週(5,3,1,1,1 Reps)\n第一組%.2f\n第二組%.2f\n第三組%.2f\n第J+1組%.2f\n第J+2組%.2f\n第J+3組%.2f\n",workoutMap[data[2]],data[3],ftoMap[3][1]*weight,ftoMap[3][2]*weight,ftoMap[3][3]*weight,ftoMap[3][4]*weight*ftoMap[3][3],ftoMap[3][5]*weight*ftoMap[3][3],ftoMap[3][6]*weight*ftoMap[3][3])    
+    case 4:
+        response=fmt.Sprintf("%s-第%s週(每組5Reps)\n第一組%.2f\n第二組%.2f\n第三組%.2f",workoutMap[data[2]],data[3],ftoMap[4][1]*weight,ftoMap[4][2]*weight,ftoMap[4][3]*weight) 
+    }
+    
+    }
+
+}
+return response
+
+}

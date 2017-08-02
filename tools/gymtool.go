@@ -24,7 +24,7 @@ func Gt(message string) string{
     case string('b') :
     response=bodyinfo(message)
     case string('h') :
-    response="重量轉換: p數字(轉公斤),k數字(轉磅)\n長度轉換: m數字(轉吋與英尺),i數字(轉公尺)\n食物成份: f食物名稱\n1rm計算: r重量-最多可做組數(r100-8)\n基礎代謝率(BMR): b-身高(公分)-體重(公斤)-年齡(整數)-性別(1男0女)"
+    response="重量轉換: p數字(轉公斤),k數字(轉磅)\n長度轉換: m數字(轉吋與英尺),i數字(轉公尺)\n食物成份: f食物名稱\n1rm計算: r重量-最多可做組數(r100-8)\n基礎代謝率(BMR): b身高(公分)-體重(公斤)-年齡(整數)-性別(1男0女)"
     }
 	return response
 

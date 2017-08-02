@@ -86,7 +86,7 @@ func food(msg string) string{
 
     // return response+"\n您可搜尋類似食物:"+other
 
-    file, err := os.Open("food.csv")
+    file, err := os.Open("foods.csv")
     if err != nil {
         fmt.Println("Error:", err)
         //return

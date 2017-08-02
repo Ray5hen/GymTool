@@ -105,16 +105,17 @@ func food(msg string) string{
             //return
         }
         for i := 0; i < len(record); i++ {
-            if strings.Contains(record[0],input){
-                response=input
+            if record[0][0:strings.Index(record[0], ",")]==input{
+                food:=strings.Split(record[0],",")
+                response=fmt.Sprintf("%s 含有"+" 熱量(Kcal)%s"+" 蛋白質(g)%s"+" 脂肪(g):%s"+" 碳水化合物(g):%s",food[0],food[1],food[2],food[3],food[4])
             }
-            if strings.ContainsAny(record[0],input){
+            if strings.ContainsAny(record[0],"雞"){
                 search=search+record[0][0:strings.Index(record[0], ",")]+","
             }
         }
         lineCount += 1
     }
-    return response+"\n您可搜尋類似食物:"+search
+    return response+"\n\n您可搜尋類似的食物:\n"+ search
 }
 
 func rm(msg string) string{

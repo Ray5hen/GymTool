@@ -27,7 +27,7 @@ func Gt(message string) string{
     response=schedule(message)
     case string('h') :
     response="重量轉換: p數字(轉公斤),k數字(轉磅)\n長度轉換: m數字(轉吋與英尺),i數字(轉公尺)\n食物成份: f食物名稱\n1rm計算: r重量-最多可做組數(r100-8)\n基礎代謝率(BMR): b身高(公分)-體重(公斤)-年齡(整數)-性別(1男0女)\n訓練課表: 請按s-h查詢"
-    case string('t')
+    case string('t') :
     response=training(message)
     }
 	return response
@@ -232,10 +232,10 @@ return response
 
 }
 
-func training(msg string) []string{
-    var response = [2]string
-    response[0]="https://s-media-cache-ak0.pinimg.com/736x/0c/0e/78/0c0e784806bc4f395e321ece1b720cc8--forearm-exercises-forearm-workout.jpg"
-    response[1]="https://s-media-cache-ak0.pinimg.com/736x/0c/0e/78/0c0e784806bc4f395e321ece1b720cc8--forearm-exercises-forearm-workout.jpg"
+func training(msg string) string{
+    
+    response:="https://s-media-cache-ak0.pinimg.com/736x/0c/0e/78/0c0e784806bc4f395e321ece1b720cc8--forearm-exercises-forearm-workout.jpg"+","+"https://s-media-cache-ak0.pinimg.com/736x/0c/0e/78/0c0e784806bc4f395e321ece1b720cc8--forearm-exercises-forearm-workout.jpg"
+    
     return response
     
 }

@@ -5,6 +5,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 	"github.com/line/line-bot-sdk-go/linebot"
 	//"line/line-bot-sdk-go/linebot"
 	gymtool "github.com/ray5hen/gymtool/tools"
@@ -42,7 +43,7 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
       				// handle error
    				   //}
 				if message.Text=="t"{
-					image:=gymtool.Gt(message.Text)
+					image:= strings.Split(gymtool.Gt(message.Text),",")
 					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(image[0],image[1])).Do(); err != nil {
 					log.Print(err)
 				}

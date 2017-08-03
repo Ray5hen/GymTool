@@ -41,6 +41,12 @@ func callbackHandler(w http.ResponseWriter, r *http.Request) {
    				   //if err != nil {
       				// handle error
    				   //}
+				if message.Text=="t"{
+					image:=gymtool.Gt(message.Text)
+					if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewImageMessage(image[0],image[1])).Do(); err != nil {
+					log.Print(err)
+				}
+				}
 				if _, err = bot.ReplyMessage(event.ReplyToken, linebot.NewTextMessage(gymtool.Gt(message.Text))).Do(); err != nil {
 					log.Print(err)
 				}

@@ -120,7 +120,7 @@ func food(msg string) string{
                 }
             } else {
 
-                if record[0][0:strings.Index(record[0], ",")] == input {
+                if record[0][0:strings.Index(record[0], ",")] == input[1:len(input)] {
                     food := strings.Split(record[0], ",")
                     response = fmt.Sprintf("%s 含有"+" 熱量(Kcal)%s"+" 蛋白質(g)%s"+" 脂肪(g):%s"+" 碳水化合物(g):%s", food[0], food[1], food[2], food[3], food[4])
                 }

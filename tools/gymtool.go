@@ -63,7 +63,7 @@ func food(msg string) string{
         "c": "碳水化合物",
     }
 
-    file, err := os.Open("foods3.csv")
+    file, err := os.Open("foods.csv")
     if err != nil {
         fmt.Println("Error:", err)
     }
